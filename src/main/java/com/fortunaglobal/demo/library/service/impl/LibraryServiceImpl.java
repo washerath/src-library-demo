@@ -1,7 +1,6 @@
 package com.fortunaglobal.demo.library.service.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -25,14 +24,11 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Override
     public Book registerBook(String isbn, String title, String author) {
-
         return bookRepository.save(new Book(isbn, title, author));
-
     }
 
     @Override
     public List<Book> listBooks() {
-
         return bookRepository.findAll();
     }
 
@@ -57,7 +53,6 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Override
     public void returnBook(String email, long bookId) {
-        Borrower borrower = getBorrowerByEmail(email);
         Book book = getBookById(bookId);
 
         if (book.getBorrower() == null) {
@@ -73,7 +68,6 @@ public class LibraryServiceImpl implements LibraryService {
         bookRepository.save(book);
     }
 
-    // --- Extracted helper methods ---
     private Borrower getBorrowerByEmail(String email) {
         Borrower borrower = borrowerRepository.findByEmail(email);
         if (borrower == null) {
